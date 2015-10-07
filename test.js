@@ -4,6 +4,7 @@ question[0] = new Array();
 question[0]['title'] = 'This is Q0';
 
 question[0]['option'] = new Array();
+question[0]['vote'] = new Array();
 question[0]['option'][0] = 'This is Q0 option0';
 question[0]['option'][1] = 'This is Q0 option1';
 question[0]['option'][2] = 'This is Q0 option2';
@@ -35,14 +36,27 @@ $(document).ready(function() {
 
 
 for (var i = 0; i < question[0]['option'].length; i++) {
-  formStr = formStr + '<label for="option' + i + '">'+question[0]['option'][i]+'</label><input type="radio" name="option' + i + '" id="' + i + '" checked="checked" /><br>';
+  //formStr = formStr + '<label for="option' + i + '">'+question[0]['option'][i]+'</label><input type="radio" name="option' + i + '" id="option' + i + '" checked="unchecked" /><br>';
+  formStr = formStr + '<label for="option' + i + '">'+question[0]['option'][i]+'</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
 }
 $('#optionForm').html(formStr);
 
 
 
   $('#button_vote').click(function() {
-    alert(formStr);
+
+for (var i = 0; i < question[0]['option'].length; i++) {
+  optionId="#option"+i;
+  //alert( optionId + " " + $( optionId ).attr( "id" ) + " " + $( optionId ).prop('checked'));
+if ($( optionId ).prop('checked')) {
+  question[0]['vote'][i]=1;
+} else {
+  question[0]['vote'][i]=0;
+}
+}
+
+
+
   });
 
   $('#button_test').click(function() {
