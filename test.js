@@ -1,13 +1,13 @@
-title = 'This it title';
+title = "This it title";
 question = new Array();
-question[0] = new Array();
-question[0]['title'] = 'This is Q0';
+question[ 0 ] = new Array();
+question[ 0 ][ "title" ] = "This is Q0";
 
-question[0]['option'] = new Array();
-question[0]['vote'] = new Array();
-question[0]['option'][0] = 'This is Q0 option0';
-question[0]['option'][1] = 'This is Q0 option1';
-question[0]['option'][2] = 'This is Q0 option2';
+question[ 0 ][ "option" ] = new Array();
+question[ 0 ][ "vote" ] = new Array();
+question[ 0 ][ "option" ][ 0 ] = "This is Q0 option0";
+question[ 0 ][ "option" ][ 1 ] = "This is Q0 option1";
+question[ 0 ][ "option" ][ 2 ] = "This is Q0 option2";
 /*
 question[1] = new Array();
 //question[1]['title'] = "This is Q1";
@@ -28,44 +28,41 @@ question[3]['option1'] = "This is Q3 option1";
 question[3]['option2'] = "This is Q3 option2";
 */
 questionNow = 0;
-formStr='';
+formStr = "";
 
-$(document).ready(function() {
+$( document ).ready( function() {
 
-  $('#title').html(title);
+  $( "#title" ).html( title );
 
+for ( var i = 0; i < question[ 0 ][ "option" ].length; i++ ) {
 
-for (var i = 0; i < question[0]['option'].length; i++) {
   //formStr = formStr + '<label for="option' + i + '">'+question[0]['option'][i]+'</label><input type="radio" name="option' + i + '" id="option' + i + '" checked="unchecked" /><br>';
-  formStr = formStr + '<label for="option' + i + '">'+question[0]['option'][i]+'</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
+  formStr = formStr + '<label for="option' + i + '">' + question[ 0 ][ "option" ][ i ] + '</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
 }
-$('#optionForm').html(formStr);
+$( "#optionForm" ).html( formStr );
 
+  $( "#button_vote" ).click( function() {
 
+for ( var i = 0; i < question[ 0 ][ "option" ].length; i++ ) {
+  optionId = "#option" + i;
 
-  $('#button_vote').click(function() {
-
-for (var i = 0; i < question[0]['option'].length; i++) {
-  optionId="#option"+i;
-  //alert( optionId + " " + $( optionId ).attr( "id" ) + " " + $( optionId ).prop('checked'));
-if ($( optionId ).prop('checked')) {
-  question[0]['vote'][i]=1;
+  //alert( optionId + " " + $( optionId ).attr( "id" ) + " " + $( optionId ).prop("checked"));
+if ( $( optionId ).prop( "checked" ) ) {
+  question[ 0 ][ "vote" ][ i ] = 1;
 } else {
-  question[0]['vote'][i]=0;
+  question[ 0 ][ "vote" ][ i ] = 0;
 }
 }
 
+  } );
 
+  $( "#button_test" ).click( function() {
+    $( "input" ).each( function( key, value ) {
 
-  });
+      //alert( $( this ).attr( "id" ) + " " + $( this ).prop("checked"));
 
-  $('#button_test').click(function() {
-    $('input').each(function(key, value) {
+    } );
+    $( "#b" ).text( b );
+  } )
 
-      //alert( $( this ).attr( "id" ) + " " + $( this ).prop('checked'));
-
-    });
-    $("#b").text(b);
-  })
-
-;});
+;} );
