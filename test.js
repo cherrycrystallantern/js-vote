@@ -53,6 +53,20 @@ if ( $( optionId ).prop( "checked" ) ) {
   question[ 0 ][ "vote" ][ i ] = 0;
 }
 }
+$.ajax( {
+    type:"POST",
+    url:"test.php",
+    data:{
+      vote:question[ 0 ][ "vote" ]
+    },
+    dataType:"json",
+    success:function( msg ) {
+      alert( msg );
+    },
+    error:function() {
+        alert( "something happened" );
+    }
+} );
 
   } );
 
