@@ -1,82 +1,146 @@
-title = "This it title";
-question = new Array();
-question[ 0 ] = new Array();
-question[ 0 ][ "title" ] = "This is Q0";
 
-question[ 0 ][ "option" ] = new Array();
-question[ 0 ][ "vote" ] = new Array();
-question[ 0 ][ "option" ][ 0 ] = "This is Q0 option0";
-question[ 0 ][ "option" ][ 1 ] = "This is Q0 option1";
-question[ 0 ][ "option" ][ 2 ] = "This is Q0 option2";
-/*
-question[1] = new Array();
-//question[1]['title'] = "This is Q1";
-question[1]['option0'] = "This is Q1 option0";
-question[1]['option1'] = "This is Q1 option1";
-question[1]['option2'] = "This is Q1 option2";
+var questionData = {
+  "mTitle": "This is main title",
+  "mInfo": "This is main information",
+  "mPic": "This is main title picturl url",
+  "question": [ {
+    "id":1,
+    "qTitle": "Question1 title",
+    "qInfo": "Question1 information",
+    "qPic": "Question1 Picture URL",
+    "qChoice": "s",
+    "qOption":  {
+      "o1": "This is Question1 Option1",
+      "o2": "This is Question1 Option2",
+      "o3": "This is Question1 Option3"
+    }
+  }, {
+    "id":2,
+    "qTitle": "Question2 title",
+    "qInfo": "Question2 information",
+    "qPic": "Question2 Picture URL",
+    "qChoice": "m",
+    "qOption":  {
+      "o1": "This is Question2 Option1",
+      "o2": "This is Question2 Option2",
+      "o3": "This is Question2 Option3"
+    }
+  }, {
+    "id":3,
+    "qTitle": "Question3 title",
+    "qInfo": "Question3 information",
+    "qPic": "Question3 Picture URL",
+    "qChoice": "m",
+    "qOption":  {
+      "o1": "This is Question3 Option1",
+      "o2": "This is Question3 Option2",
+      "o3": "This is Question3 Option3"
+    }
+  }, {
+    "id":4,
+    "qTitle": "Question4 title",
+    "qInfo": "Question4 information",
+    "qPic": "Question4 Picture URL",
+    "qChoice": "m",
+    "qOption":  {
+      "o1": "This is Question4 Option1",
+      "o2": "This is Question4 Option2",
+      "o3": "This is Question4 Option3"
+    }
+  }, {
+    "id":5,
+    "qTitle": "Question5 title",
+    "qInfo": "Question5 information",
+    "qPic": "Question5 Picture URL",
+    "qChoice": "m",
+    "qOption":  {
+      "o1": "This is Question5 Option1",
+      "o2": "This is Question5 Option2",
+      "o3": "This is Question5 Option3"
+    }
+  }
 
-question[2] = new Array();
-//question[2]['title'] = "This is Q2";
-question[2]['option0'] = "This is Q2 option0";
-question[2]['option1'] = "This is Q2 option1";
-question[2]['option2'] = "This is Q2 option2";
+ ]
+}
+;
 
-question[3] = new Array();
-//question[3]['title'] = "This is Q2";
-question[3]['option0'] = "This is Q3 option0";
-question[3]['option1'] = "This is Q3 option1";
-question[3]['option2'] = "This is Q3 option2";
-*/
-questionNow = 0;
-formStr = "";
+function plantQuestionTree(questionData) {
+
+  var questionTree = new Object;
+  questionTree = questionData;
+  questionTree.firstQuestionId = questionTree.question[ 0 ].id;
+  questionTree.lastQuestionId = questionTree.question[ questionTree.question.length - 1 ].id;
+  questionTree.theQuestion = function(id) {
+    //console.log("Let's find " + id);
+    $.each(questionTree.question, function(k, v) {
+      //console.log(v.id + " " + id);
+      if (v.id == id ) {
+        //console.log("Find it");
+        tmp = v;
+      }
+    }
+  );
+    return tmp;
+  };
+
+  return questionTree;
+}
+
+function flushQuestion(questionIdNow) {
+  //flush qTitle and qOption
+  $("#qTitle").text(questionTree.theQuestion(questionIdNow).qTitle);
+  formStr = "";
+  $.each( questionTree.theQuestion( questionIdNow ).qOption, function( i, v ) {
+  formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
+});
+  $("#qForm").html(formStr);
+  ableButton();
+}
+
+function freezeButton() {
+  $(":button").prop('disabled', true);
+}
+
+function ableButton() {
+  freezeButton();
+  if (questionIdNow < questionTree.lastQuestionId) {
+    $("#button_next").prop('disabled', false);
+    $("#button_last").prop('disabled', false);
+  };
+  if (questionIdNow > questionTree.firstQuestionId) {
+    $("#button_first").prop('disabled', false);
+    $("#button_prev").prop('disabled', false);
+  }
+}
 
 $( document ).ready( function() {
+  questionTree = plantQuestionTree(questionData);
+  //console.log(questionTree);
+  questionIdNow = questionTree.firstQuestionId;
 
-  $( "#title" ).html( title );
+  var jsVoteFrame = '<h3 id="mTitle">Loading title</h3><h5 id="qTitle">Loading Question to ask</h5><form id="qForm">Loading Form to select option</form>';
+  $( "#js-vote" ).html( jsVoteFrame );
+  $("#mTitle").text(questionTree.mTitle);
+  console.log(questionTree.theQuestion(questionIdNow));
+  flushQuestion(questionIdNow);
 
-for ( var i = 0; i < question[ 0 ][ "option" ].length; i++ ) {
+  $("#button_first").click(function() {
+    questionIdNow = questionIdNow.firstQuestionId ;
+    flushQuestion(questionIdNow);
+  });
 
-  //formStr = formStr + '<label for="option' + i + '">'+question[0]['option'][i]+'</label><input type="radio" name="option' + i + '" id="option' + i + '" checked="unchecked" /><br>';
-  formStr = formStr + '<label for="option' + i + '">' + question[ 0 ][ "option" ][ i ] + '</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
-}
-$( "#optionForm" ).html( formStr );
+  $("#button_prev").click(function() {
+    questionIdNow = questionIdNow - 1;
+    flushQuestion(questionIdNow);
+  });
 
-  $( "#button_vote" ).click( function() {
+  $("#button_next").click(function() {
+    questionIdNow = questionIdNow + 1;
+    flushQuestion(questionIdNow);
+  });
+  $("#button_last").click(function() {
+    questionIdNow = questionTree.lastQuestionId;
+    flushQuestion(questionIdNow);
+  });
 
-for ( var i = 0; i < question[ 0 ][ "option" ].length; i++ ) {
-  optionId = "#option" + i;
-
-  //alert( optionId + " " + $( optionId ).attr( "id" ) + " " + $( optionId ).prop("checked"));
-if ( $( optionId ).prop( "checked" ) ) {
-  question[ 0 ][ "vote" ][ i ] = 1;
-} else {
-  question[ 0 ][ "vote" ][ i ] = 0;
-}
-}
-$.ajax( {
-    type:"POST",
-    url:"test.php",
-    data:{
-      vote:question[ 0 ][ "vote" ]
-    },
-    dataType:"json",
-    success:function( msg ) {
-      alert( msg );
-    },
-    error:function() {
-        alert( "something happened" );
-    }
-} );
-
-  } );
-
-  $( "#button_test" ).click( function() {
-    $( "input" ).each( function( key, value ) {
-
-      //alert( $( this ).attr( "id" ) + " " + $( this ).prop("checked"));
-
-    } );
-    $( "#b" ).text( b );
-  } )
-
-;} );
+});
