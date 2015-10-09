@@ -125,7 +125,7 @@ $( document ).ready( function() {
   flushQuestion(questionIdNow);
 
   $("#button_first").click(function() {
-    questionIdNow = questionIdNow.firstQuestionId ;
+    questionIdNow = questionTree.firstQuestionId ;
     flushQuestion(questionIdNow);
   });
 
