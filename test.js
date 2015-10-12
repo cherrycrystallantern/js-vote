@@ -71,11 +71,8 @@ function plantQuestionTree(questionData) {
   questionTree.firstQuestionId = questionTree.question[ 0 ].id;
   questionTree.lastQuestionId = questionTree.question[ questionTree.question.length - 1 ].id;
   questionTree.theQuestion = function(id) {
-    //console.log("Let's find " + id);
     $.each(questionTree.question, function(k, v) {
-      //console.log(v.id + " " + id);
       if (v.id == id ) {
-        //console.log("Find it");
         tmp = v;
       }
     }
@@ -87,7 +84,6 @@ function plantQuestionTree(questionData) {
 }
 
 function flushQuestion(questionIdNow) {
-  //flush qTitle and qOption
   $("#qTitle").text(questionTree.theQuestion(questionIdNow).qTitle);
   formStr = "";
   $.each( questionTree.theQuestion( questionIdNow ).qOption, function( i, v ) {
@@ -98,24 +94,23 @@ function flushQuestion(questionIdNow) {
 }
 
 function freezeButton() {
-  $(":button").prop('disabled', true);
+  $(":button").prop("disabled", true);
 }
 
 function ableButton() {
   freezeButton();
   if (questionIdNow < questionTree.lastQuestionId) {
-    $("#button_next").prop('disabled', false);
-    $("#button_last").prop('disabled', false);
+    $("#button_next").prop("disabled", false);
+    $("#button_last").prop("disabled", false);
   };
   if (questionIdNow > questionTree.firstQuestionId) {
-    $("#button_first").prop('disabled', false);
-    $("#button_prev").prop('disabled', false);
+    $("#button_first").prop("disabled", false);
+    $("#button_prev").prop("disabled", false);
   }
 }
 
 $( document ).ready( function() {
   questionTree = plantQuestionTree(questionData);
-  //console.log(questionTree);
   questionIdNow = questionTree.firstQuestionId;
 
   var jsVoteFrame = '<h3 id="mTitle">Loading title</h3><h5 id="qTitle">Loading Question to ask</h5><form id="qForm">Loading Form to select option</form>';
@@ -125,7 +120,7 @@ $( document ).ready( function() {
   flushQuestion(questionIdNow);
 
   $("#button_first").click(function() {
-    questionIdNow = questionIdNow.firstQuestionId ;
+    questionIdNow = questionTree.firstQuestionId ;
     flushQuestion(questionIdNow);
   });
 
