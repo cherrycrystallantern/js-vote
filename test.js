@@ -72,7 +72,7 @@ function plantQuestionTree(questionData) {
   questionTree.lastQuestionId = questionTree.question[ questionTree.question.length - 1 ].id;
   questionTree.theQuestion = function(id) {
     $.each(questionTree.question, function(k, v) {
-      if (v.id == id ) {
+      if (v.id == id) {
         tmp = v;
       }
     }
@@ -86,7 +86,7 @@ function plantQuestionTree(questionData) {
 function flushQuestion(questionIdNow) {
   $("#qTitle").text(questionTree.theQuestion(questionIdNow).qTitle);
   formStr = "";
-  $.each( questionTree.theQuestion( questionIdNow ).qOption, function( i, v ) {
+  $.each(questionTree.theQuestion(questionIdNow).qOption, function(i, v) {
   formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
 });
   $("#qForm").html(formStr);
@@ -109,12 +109,12 @@ function ableButton() {
   }
 }
 
-$( document ).ready( function() {
+$(document).ready(function() {
   questionTree = plantQuestionTree(questionData);
   questionIdNow = questionTree.firstQuestionId;
 
   var jsVoteFrame = '<h3 id="mTitle">Loading title</h3><h5 id="qTitle">Loading Question to ask</h5><form id="qForm">Loading Form to select option</form>';
-  $( "#js-vote" ).html( jsVoteFrame );
+  $("#js-vote").html(jsVoteFrame);
   $("#mTitle").text(questionTree.mTitle);
   console.log(questionTree.theQuestion(questionIdNow));
   flushQuestion(questionIdNow);
