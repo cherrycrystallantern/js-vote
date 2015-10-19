@@ -41,7 +41,7 @@ var questionData = {
     "qTitle": "Question4 title",
     "qInfo": "Question4 information",
     "qPic": "Question4 Picture URL",
-    "qChoice": "m",
+    "qChoice": "s",
     "qOption":  {
       "o1": "This is Question4 Option1",
       "o2": "This is Question4 Option2",
@@ -85,9 +85,19 @@ function plantQuestionTree(questionData) {
 
 function flushQuestion(questionIdNow) {
   $("#qTitle").text(questionTree.theQuestion(questionIdNow).qTitle);
+  switch (questionTree.theQuestion(questionIdNow).qChoice) {
+    case "s":
+      inputType = 'radio';
+      break;
+    case "m":
+      inputType = 'checkbox';
+      break;
+    default:
+      alert("Check InputType Error");
+  }
   formStr = "";
   $.each(questionTree.theQuestion(questionIdNow).qOption, function(i, v) {
-  formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type="radio" name="option' + i + '" id="option' + i + '" /><br>';
+  formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type=' + inputType + ' name="option' + i + '" id="option' + i + '" /><br>';
 });
   $("#qForm").html(formStr);
   ableButton();
@@ -107,6 +117,10 @@ function ableButton() {
     $("#button_first").prop("disabled", false);
     $("#button_prev").prop("disabled", false);
   }
+}
+
+function selectOption() {
+  
 }
 
 $(document).ready(function() {
