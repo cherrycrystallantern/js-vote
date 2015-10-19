@@ -73,7 +73,6 @@ function plantQuestionTree(questionData) {
     $.each(questionTree.question, function(k, v) {
       if (v.id == id) {
         tmp = v;
-
       }
     }
   );
@@ -141,9 +140,36 @@ function ableButton() {
   }
 }
 
+function optionSelectCheck() {
+  var flag = true;
+  $.each(questionTree.question, function(k, v) {
+    //console.log(answerTree[ v.id ]);
+    if (typeof answerTree[ v.id ] == 'undefined' || answerTree[ v.id ].length == 0) {
+      console.log('questions ' + v.id + ' have no answer');
+      flag = false;
+    }
+  });
+  return flag;
+}
+
 function voteTheAnswer(answerTree) {
   console.log("Vote the answer : ", answerTree);
+  $.ajax({
+    type:'POST',
+    url:'test.php',
+    data:{
+      vote:answerTree
+    },
+    success:function(msg) {
+      console.log(msg);
+    },
+    error:function() {
+      alert('Vote Failed !');
+    }
+  });
 }
+
+
 
 $(document).ready(function() {
   questionTree = plantQuestionTree(questionData);
@@ -178,19 +204,12 @@ $(document).ready(function() {
   });
 
   $("#button_vote").click(function() {
-    console.log('you clicked the #button_vote');
-    console.log(questionTree.question);
-    var flag = 0;
-    $.each(questionTree.question, function(k, v) {
-      //console.log(answerTree[ v.id ]);
-      if (typeof answerTree[ v.id ] == 'undefined' || answerTree[ v.id ].length == 0) {
-        console.log('questions ' + v.id + ' have no answer');
-        flag = 1;
-      }
-    });
-    if (!flag) {
+    if (optionSelectCheck()) {
       voteTheAnswer(answerTree);
+    }else {
+      console.log('you should answer all the question before vote');
     }
+
   });
 
   $("#button_reset").click(function() {
@@ -198,7 +217,7 @@ $(document).ready(function() {
   });
 
   $("#button_test").click(function() {
-    console.log('you clicked the #button_test');
-    console.log(answerTree);
+    console.log('you clicked the #button_vote');
+    console.log(optionSelectCheck());
   });
 });
