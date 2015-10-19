@@ -1,71 +1,6 @@
-
-var questionData = {
-  "mTitle": "This is main title",
-  "mInfo": "This is main information",
-  "mPic": "This is main title picturl url",
-  "question": [ {
-    "id":1,
-    "qTitle": "Question1 title",
-    "qInfo": "Question1 information",
-    "qPic": "Question1 Picture URL",
-    "qChoice": "s",
-    "qOption":  {
-      "o1": "This is Question1 Option1",
-      "o2": "This is Question1 Option2",
-      "o3": "This is Question1 Option3"
-    }
-  }, {
-    "id":2,
-    "qTitle": "Question2 title",
-    "qInfo": "Question2 information",
-    "qPic": "Question2 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "o1": "This is Question2 Option1",
-      "o2": "This is Question2 Option2",
-      "o3": "This is Question2 Option3"
-    }
-  }, {
-    "id":3,
-    "qTitle": "Question3 title",
-    "qInfo": "Question3 information",
-    "qPic": "Question3 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "o1": "This is Question3 Option1",
-      "o2": "This is Question3 Option2",
-      "o3": "This is Question3 Option3"
-    }
-  }, {
-    "id":4,
-    "qTitle": "Question4 title",
-    "qInfo": "Question4 information",
-    "qPic": "Question4 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "o1": "This is Question4 Option1",
-      "o2": "This is Question4 Option2",
-      "o3": "This is Question4 Option3"
-    }
-  }, {
-    "id":5,
-    "qTitle": "Question5 title",
-    "qInfo": "Question5 information",
-    "qPic": "Question5 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "o1": "This is Question5 Option1",
-      "o2": "This is Question5 Option2",
-      "o3": "This is Question5 Option3"
-    }
-  }
-
- ]
-}
-;
+var questionData;
 
 function plantQuestionTree(questionData) {
-
   var questionTree = new Object;
   questionTree = questionData;
   questionTree.firstQuestionId = questionTree.question[ 0 ].id;
@@ -79,26 +14,63 @@ function plantQuestionTree(questionData) {
   );
     return tmp;
   };
-
   return questionTree;
 }
 
+
 function flushQuestion(questionIdNow) {
   $("#qTitle").text(questionTree.theQuestion(questionIdNow).qTitle);
+  switch (questionTree.theQuestion(questionIdNow).qChoice) {
+    case "s":
+      inputType = 'radio';
+      break;
+    case "m":
+      inputType = 'checkbox';
+      break;
+    default:
+      alert("Check InputType Error");
+  }
   formStr = "";
   $.each(questionTree.theQuestion(questionIdNow).qOption, function(i, v) {
-  formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type="radio" name="q' + questionIdNow + 'option" id="option' + i + '" /><br>';
-});
+    console.log(i, answerTree[ questionIdNow ]);
+    console.log($.inArray(i, answerTree[ questionIdNow ]));
+    if ($.inArray(i, answerTree[ questionIdNow ]) >= 0) {
+      console.log('$.inArray(i, answerTree[ questionIdNow ])');
+      ifchecked = 'checked="checked"';
+    } else {
+      ifchecked = '';
+    }
+    formStr = formStr + '<label for="' + i + '">' + v + '</label><input type=' + inputType + ' name="' + questionIdNow + '" id="' + i + '" ' + ifchecked + '/><br>';
+  });
   $("#qForm").html(formStr);
   ableButton();
+
+  $("input").click(function() {
+    clickOption($(this).attr("name"));
+  });
 }
 
-function freezeButton() {
-  $(":button").prop("disabled", true);
+function clickOption(clickedOption) {
+    var tmp = new Array();
+    $.each($("input"), function(i, v) {
+      if ($(this).prop("checked")) {
+        tmp.push($(this).attr("id"));
+      }
+    });
+    answerTree[ clickedOption ] = tmp ;
+    console.log(clickedOption, answerTree[ clickedOption ]);
+  }
+
+
+function freezeNaviButton() {
+  $("#button_next").prop("disabled", true);
+  $("#button_last").prop("disabled", true);
+  $("#button_first").prop("disabled", true);
+  $("#button_prev").prop("disabled", true);
 }
 
 function ableButton() {
-  freezeButton();
+  freezeNaviButton();
   if (questionIdNow < questionTree.lastQuestionId) {
     $("#button_next").prop("disabled", false);
     $("#button_last").prop("disabled", false);
@@ -109,15 +81,61 @@ function ableButton() {
   }
 }
 
+function optionSelectCheck() {
+  var flag = true;
+  $.each(questionTree.question, function(k, v) {
+    if (typeof answerTree[ v.id ] == 'undefined' || answerTree[ v.id ].length == 0) {
+      console.log('questions ' + v.id + ' have no answer');
+      flag = false;
+    }
+  });
+  return flag;
+}
+
+function getTheQuestion() {
+  console.log("Let's get The Question");
+  $.ajax({
+    type:'GET',
+    url:'test.json',
+    dataType:"json",
+    async:false,
+    success:function(msg) {
+      questionData = msg;
+      console.log('get The Question Success !');
+    },
+    error:function() {
+      console.log('get The Question Failed !');
+    }
+  });
+}
+
+function voteTheAnswer() {
+  console.log("Vote the answer : ", answerTree);
+  $.ajax({
+    type:'POST',
+    url:'test.php',
+    data:{
+      vote:answerTree
+    },
+    success:function(msg) {
+      console.log(msg);
+    },
+    error:function() {
+      alert('Vote Failed !');
+    }
+  });
+}
+
+
+
 $(document).ready(function() {
+  getTheQuestion();
   questionTree = plantQuestionTree(questionData);
   questionIdNow = questionTree.firstQuestionId;
-  qAnswer = new Array();
-
+  answerTree = new Array();
   var jsVoteFrame = '<h3 id="mTitle">Loading title by js</h3><h5 id="qTitle">Loading Question by js</h5><form id="qForm">Loading Option by js</form>';
   $("#js-vote").html(jsVoteFrame);
   $("#mTitle").text(questionTree.mTitle);
-  console.log(questionTree.theQuestion(questionIdNow));
   flushQuestion(questionIdNow);
 
   $("#button_first").click(function() {
@@ -140,16 +158,23 @@ $(document).ready(function() {
     flushQuestion(questionIdNow);
   });
 
-  $("input").click(function() {
+  $("#button_vote").click(function() {
+    if (optionSelectCheck()) {
+      voteTheAnswer();
+    }else {
+      console.log('you should answer all the question before vote');
+    }
+  });
 
+  $("#button_reset").click(function() {
+    console.log('you clicked the #button_reset');
+    answerTree = new Array();
+    questionIdNow = questionTree.firstQuestionId;
+    flushQuestion(questionIdNow);
+  });
 
-    qAnswer[ questionIdNow ] = null;
-
-    $.each($("input"), function(i, v) {
-      //console.log($(this));
-      console.log("Click", $(this).attr("name"), $(this).prop("checked"));
-
-    });
-
+  $("#button_test").click(function() {
+    console.log('you clicked the #button_vote');
+    console.log(optionSelectCheck());
   });
 });
