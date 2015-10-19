@@ -1,66 +1,4 @@
-var questionData = {
-  "mTitle": "This is main title",
-  "mInfo": "This is main information",
-  "mPic": "This is main title picturl url",
-  "question": [ {
-    "id":1,
-    "qTitle": "Question1 title",
-    "qInfo": "Question1 information",
-    "qPic": "Question1 Picture URL",
-    "qChoice": "s",
-    "qOption":  {
-      "1": "This is Question1 Option1",
-      "2": "This is Question1 Option2",
-      "3": "This is Question1 Option3"
-    }
-  }, {
-    "id":2,
-    "qTitle": "Question2 title",
-    "qInfo": "Question2 information",
-    "qPic": "Question2 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "1": "This is Question2 Option1",
-      "2": "This is Question2 Option2",
-      "3": "This is Question2 Option3"
-    }
-  }, {
-    "id":3,
-    "qTitle": "Question3 title",
-    "qInfo": "Question3 information",
-    "qPic": "Question3 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "1": "This is Question3 Option1",
-      "2": "This is Question3 Option2",
-      "3": "This is Question3 Option3"
-    }
-  }, {
-    "id":4,
-    "qTitle": "Question4 title",
-    "qInfo": "Question4 information",
-    "qPic": "Question4 Picture URL",
-    "qChoice": "s",
-    "qOption":  {
-      "1": "This is Question4 Option1",
-      "2": "This is Question4 Option2",
-      "3": "This is Question4 Option3"
-    }
-  }, {
-    "id":5,
-    "qTitle": "Question5 title",
-    "qInfo": "Question5 information",
-    "qPic": "Question5 Picture URL",
-    "qChoice": "m",
-    "qOption":  {
-      "1": "This is Question5 Option1",
-      "2": "This is Question5 Option2",
-      "3": "This is Question5 Option3"
-    }
-  }
- ]
-}
-;
+var questionData;
 
 function plantQuestionTree(questionData) {
   var questionTree = new Object;
@@ -154,6 +92,23 @@ function optionSelectCheck() {
   return flag;
 }
 
+function getTheQuestion() {
+  console.log("Let's get The Question");
+  $.ajax({
+    type:'GET',
+    url:'test.json',
+    dataType:"json",
+    async:false,
+    success:function(msg) {
+      questionData = msg;
+      console.log('get The Question Success !');
+    },
+    error:function() {
+      console.log('get The Question Failed !');
+    }
+  });
+}
+
 function voteTheAnswer() {
   console.log("Vote the answer : ", answerTree);
   $.ajax({
@@ -174,6 +129,7 @@ function voteTheAnswer() {
 
 
 $(document).ready(function() {
+  getTheQuestion();
   questionTree = plantQuestionTree(questionData);
   questionIdNow = questionTree.firstQuestionId;
   answerTree = new Array();
