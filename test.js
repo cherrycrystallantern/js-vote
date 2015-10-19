@@ -101,6 +101,15 @@ function flushQuestion(questionIdNow) {
 });
   $("#qForm").html(formStr);
   ableButton();
+
+  $("input").click(function() {
+    qAnswer[ questionIdNow ] = null;
+    $.each($("input"), function(i, v) {
+      //console.log($(this));
+      console.log("Click", $(this).attr("name"), $(this).prop("checked"));
+    });
+  });
+  
 }
 
 function freezeButton() {
@@ -154,16 +163,6 @@ $(document).ready(function() {
     flushQuestion(questionIdNow);
   });
 
-  $("input").click(function() {
 
 
-    qAnswer[ questionIdNow ] = null;
-
-    $.each($("input"), function(i, v) {
-      //console.log($(this));
-      console.log("Click", $(this).attr("name"), $(this).prop("checked"));
-
-    });
-
-  });
 });
