@@ -94,8 +94,16 @@ function flushQuestion(questionIdNow) {
   }
   formStr = "";
   $.each(questionTree.theQuestion(questionIdNow).qOption, function(i, v) {
-  formStr = formStr + '<label for="' + i + '">' + v + '</label><input type=' + inputType + ' name="' + questionIdNow + '" id="' + i + '" /><br>';
-});
+    console.log(i, answerTree[ questionIdNow ]);
+    console.log($.inArray(i, answerTree[ questionIdNow ]));
+    if ($.inArray(i, answerTree[ questionIdNow ]) >= 0) {
+      console.log('$.inArray(i, answerTree[ questionIdNow ])');
+      ifchecked = 'checked="checked"';
+    } else {
+      ifchecked = '';
+    }
+    formStr = formStr + '<label for="' + i + '">' + v + '</label><input type=' + inputType + ' name="' + questionIdNow + '" id="' + i + '" ' + ifchecked + '/><br>';
+  });
   $("#qForm").html(formStr);
   ableButton();
 
@@ -204,6 +212,9 @@ $(document).ready(function() {
 
   $("#button_reset").click(function() {
     console.log('you clicked the #button_reset');
+    answerTree = new Array();
+    questionIdNow = questionTree.firstQuestionId;
+    flushQuestion(questionIdNow);
   });
 
   $("#button_test").click(function() {
