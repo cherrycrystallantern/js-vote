@@ -109,15 +109,18 @@ function flushQuestion(questionIdNow) {
       console.log("Click", $(this).attr("name"), $(this).prop("checked"));
     });
   });
-  
+
 }
 
-function freezeButton() {
-  $(":button").prop("disabled", true);
+function freezeNaviButton() {
+  $("#button_next").prop("disabled", true);
+  $("#button_last").prop("disabled", true);
+  $("#button_first").prop("disabled", true);
+  $("#button_prev").prop("disabled", true);
 }
 
 function ableButton() {
-  freezeButton();
+  freezeNaviButton();
   if (questionIdNow < questionTree.lastQuestionId) {
     $("#button_next").prop("disabled", false);
     $("#button_last").prop("disabled", false);
@@ -163,6 +166,15 @@ $(document).ready(function() {
     flushQuestion(questionIdNow);
   });
 
+  $("#button_vote").click(function() {
+    console.log('you clicked the #button_vote');
+  });
 
+  $("#button_reset").click(function() {
+    console.log('you clicked the #button_reset');
+  });
 
+  $("#button_test").click(function() {
+    console.log('you clicked the #button_test');
+  });
 });
