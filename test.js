@@ -97,7 +97,7 @@ function flushQuestion(questionIdNow) {
   }
   formStr = "";
   $.each(questionTree.theQuestion(questionIdNow).qOption, function(i, v) {
-  formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type=' + inputType + ' name="option' + i + '" id="option' + i + '" /><br>';
+  formStr = formStr + '<label for="option' + i + '">' + v + '</label><input type=' + inputType + ' name="q' + questionIdNow + 'option" id="option' + i + '" /><br>';
 });
   $("#qForm").html(formStr);
   ableButton();
@@ -120,14 +120,15 @@ function ableButton() {
 }
 
 function selectOption() {
-  
+
 }
 
 $(document).ready(function() {
   questionTree = plantQuestionTree(questionData);
   questionIdNow = questionTree.firstQuestionId;
+  qAnswer = new Array();
 
-  var jsVoteFrame = '<h3 id="mTitle">Loading title</h3><h5 id="qTitle">Loading Question to ask</h5><form id="qForm">Loading Form to select option</form>';
+  var jsVoteFrame = '<h3 id="mTitle">Loading title by js</h3><h5 id="qTitle">Loading Question by js</h5><form id="qForm">Loading Option by js</form>';
   $("#js-vote").html(jsVoteFrame);
   $("#mTitle").text(questionTree.mTitle);
   console.log(questionTree.theQuestion(questionIdNow));
@@ -147,9 +148,22 @@ $(document).ready(function() {
     questionIdNow = questionIdNow + 1;
     flushQuestion(questionIdNow);
   });
+
   $("#button_last").click(function() {
     questionIdNow = questionTree.lastQuestionId;
     flushQuestion(questionIdNow);
   });
 
+  $("input").click(function() {
+
+
+    qAnswer[ questionIdNow ] = null;
+
+    $.each($("input"), function(i, v) {
+      //console.log($(this));
+      console.log("Click", $(this).attr("name"), $(this).prop("checked"));
+
+    });
+
+  });
 });
