@@ -63,13 +63,11 @@ var questionData = {
 ;
 
 function plantQuestionTree(questionData) {
-
   var questionTree = new Object;
   questionTree = questionData;
   questionTree.firstQuestionId = questionTree.question[ 0 ].id;
   questionTree.lastQuestionId = questionTree.question[ questionTree.question.length - 1 ].id;
   questionTree.theQuestion = function(id) {
-
     $.each(questionTree.question, function(k, v) {
       if (v.id == id) {
         tmp = v;
@@ -78,7 +76,6 @@ function plantQuestionTree(questionData) {
   );
     return tmp;
   };
-
   return questionTree;
 }
 
@@ -105,7 +102,6 @@ function flushQuestion(questionIdNow) {
   $("input").click(function() {
     clickOption($(this).attr("name"));
   });
-
 }
 
 function clickOption(clickedOption) {
@@ -115,7 +111,6 @@ function clickOption(clickedOption) {
         tmp.push($(this).attr("id"));
       }
     });
-    //console.log(tmp3);
     answerTree[ clickedOption ] = tmp ;
     console.log(clickedOption, answerTree[ clickedOption ]);
   }
@@ -143,7 +138,6 @@ function ableButton() {
 function optionSelectCheck() {
   var flag = true;
   $.each(questionTree.question, function(k, v) {
-    //console.log(answerTree[ v.id ]);
     if (typeof answerTree[ v.id ] == 'undefined' || answerTree[ v.id ].length == 0) {
       console.log('questions ' + v.id + ' have no answer');
       flag = false;
@@ -152,7 +146,7 @@ function optionSelectCheck() {
   return flag;
 }
 
-function voteTheAnswer(answerTree) {
+function voteTheAnswer() {
   console.log("Vote the answer : ", answerTree);
   $.ajax({
     type:'POST',
@@ -174,10 +168,7 @@ function voteTheAnswer(answerTree) {
 $(document).ready(function() {
   questionTree = plantQuestionTree(questionData);
   questionIdNow = questionTree.firstQuestionId;
-
   answerTree = new Array();
-
-
   var jsVoteFrame = '<h3 id="mTitle">Loading title by js</h3><h5 id="qTitle">Loading Question by js</h5><form id="qForm">Loading Option by js</form>';
   $("#js-vote").html(jsVoteFrame);
   $("#mTitle").text(questionTree.mTitle);
@@ -205,11 +196,10 @@ $(document).ready(function() {
 
   $("#button_vote").click(function() {
     if (optionSelectCheck()) {
-      voteTheAnswer(answerTree);
+      voteTheAnswer();
     }else {
       console.log('you should answer all the question before vote');
     }
-
   });
 
   $("#button_reset").click(function() {
