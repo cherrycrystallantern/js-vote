@@ -1,17 +1,22 @@
 [
-{ "id":1, "pId":0, "name":"按公司选择", "root":"company" , "isParent": true},
-{ "id":11, "pId":1, "name":"英特尔", "company":"英特尔" },
-{ "id":12, "pId":1, "name":"超微半导体", "company":"超微半导体" },
-
-{ "id":2, "pId":0, "name":"按系列选择", "root":"series" , "isParent": true},
-{ "id":21, "pId":2, "name":"Haswell", "series":"Haswell", "company":"英特尔" },
-{ "id":22, "pId":2, "name":"Skylake", "series":"Skylake", "company":"英特尔" },
-{ "id":23, "pId":2, "name":"APU", "series":"APU", "company":"超微半导体" },
-{ "id":24, "pId":2, "name":"速龙", "series":"速龙", "company":"超微半导体" },
-
-{ "id":3, "pId":0, "name":"按接口选择", "root":"socket" , "isParent": true},
-{ "id":31, "pId":3, "name":"LGA 1150", "series":"Haswell", "company":"英特尔" },
-{ "id":32, "pId":3, "name":"LGA 1151", "series":"Haswell", "company":"英特尔" },
-{ "id":33, "pId":3, "name":"FM2", "series":"APU", "company":"超微半导体" },
-{ "id":34, "pId":3, "name":"Socket AM3+", "series":"速龙", "company":"超微半导体" }
+{  "id": 1,  "pId": 0,  "name": "Question1 title",  "qInfo": "Question1 information",  "qPic": "Question1 Picture URL",  "qChoice": "s",  "isParent": true},
+{  "id": 11,  "pId": 1,  "isParent": false,  "name": "This is Question1 Option1"},
+{  "id": 12,  "pId": 1,  "isParent": false,  "name": "This is Question1 Option2"},
+{  "id": 13,  "pId": 1,  "isParent": false,  "name": "This is Question1 Option3"},
+{  "id": 2,  "pId": 0,  "name": "Question2 title",  "qInfo": "Question2 information",  "qPic": "Question2 Picture URL",  "qChoice": "m",  "isParent": true},
+{  "id": 21,  "pId": 2,  "isParent": false,  "name": "This is Question2 Option1"},
+{  "id": 22,  "pId": 2,  "isParent": false,  "name": "This is Question2 Option2"},
+{  "id": 23,  "pId": 2,  "isParent": false,  "name": "This is Question2 Option3"},
+{  "id": 3,  "pId": 0,  "name": "Question3 title",  "qInfo": "Question3 information",  "qPic": "Question3 Picture URL",  "qChoice": "m",  "isParent": true},
+{  "id": 31,  "pId": 3,  "isParent": false,  "name": "This is Question3 Option1"},
+{  "id": 32,  "pId": 3,  "isParent": false,  "name": "This is Question3 Option2"},
+{  "id": 33,  "pId": 3,  "isParent": false,  "name": "This is Question3 Option3"},
+{  "id": 4,  "pId": 0,  "name": "Question4 title",  "qInfo": "Question4 information",  "qPic": "Question4 Picture URL",  "qChoice": "s",  "isParent": true},
+{  "id": 41,  "pId": 4,  "isParent": false,  "name": "This is Question4 Option1"},
+{  "id": 42,  "pId": 4,  "isParent": false,  "name": "This is Question4 Option2"},
+{  "id": 43,  "pId": 4,  "isParent": false,  "name": "This is Question4 Option3"},
+{  "id": 5,  "pId": 0,  "name": "Question5 title",  "qInfo": "Question5 information",  "qPic": "Question5 Picture URL",  "qChoice": "m",  "isParent": true},
+{  "id": 51,  "pId": 5,  "isParent": false,  "name": "This is Question5 Option1"},
+{  "id": 52,  "pId": 5,  "isParent": false,  "name": "This is Question5 Option2"},
+{  "id": 53,  "pId": 5,  "isParent": false,  "name": "This is Question5 Option3"}
 ]
