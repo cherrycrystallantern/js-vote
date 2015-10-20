@@ -76,6 +76,14 @@ $(document).ready(function() {
 
       qNodes[ qNodesK ][ "optionStr" ] = JSON.stringify(tmpArray);
     });
-    console.log(JSON.stringify(qNodes));
+    //console.log(JSON.stringify(qNodes));
+    var stand = new Array();
+    stand[ 'mTitle' ] = "This is main title";
+    stand[ 'mInfo' ] = "This is main information";
+    stand[ 'mPic' ] = "This is main title picturl url";
+    console.log(JSON.stringify(stand));
+
+    stand.push(qNodes);
+    console.log(JSON.stringify(stand));
   });
 });
