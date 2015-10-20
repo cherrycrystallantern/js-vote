@@ -23,33 +23,5 @@ foreach ($voteJsondecode['question'] as $questionId => $questionContent) {
     }
 }
 
-//var_dump($zTree);
 $zTreeJson = json_encode($zTree);
 echo $zTreeJson;
-/*
-{ "id":1, "pId":0, "name":"按公司选择", "root":"company" , "isParent": true},
-{ "id":11, "pId":1, "name":"英特尔", "company":"英特尔" },
-{ "id":12, "pId":1, "name":"超微半导体", "company":"超微半导体" },
-
-
-array(6) {
-    ["id"]=>
-    int(1)
-    ["qTitle"]=>
-    string(15) "Question1 title"
-    ["qInfo"]=>
-    string(21) "Question1 information"
-    ["qPic"]=>
-    string(21) "Question1 Picture URL"
-    ["qChoice"]=>
-    string(1) "s"
-    ["qOption"]=>
-    array(3) {
-      [1]=>
-      string(25) "This is Question1 Option1"
-      [2]=>
-      string(25) "This is Question1 Option2"
-      [3]=>
-      string(25) "This is Question1 Option3"
-    }
-*/
