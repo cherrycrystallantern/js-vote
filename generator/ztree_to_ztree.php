@@ -1,7 +1,7 @@
 <?php
 
 date_default_timezone_set('Asia/Shanghai');
-$zTree1 = file_get_contents('test.json');
+$zTree1 = file_get_contents('ztree.json');
 $zTree1decode = json_decode($zTree1, true);
 /*
 $pId = '0';

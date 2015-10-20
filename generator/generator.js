@@ -6,7 +6,7 @@ var zSetting = {
   },
   async: {
     enable: true,
-    url: "test.php",
+    url: "ztree_to_ztree.php",
     autoParam: [ "id" ]
   }
 };
