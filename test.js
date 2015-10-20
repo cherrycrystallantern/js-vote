@@ -32,10 +32,7 @@ function flushQuestion(questionIdNow) {
   }
   formStr = "";
   $.each(questionTree.theQuestion(questionIdNow).qOption, function(i, v) {
-    console.log(i, answerTree[ questionIdNow ]);
-    console.log($.inArray(i, answerTree[ questionIdNow ]));
     if ($.inArray(i, answerTree[ questionIdNow ]) >= 0) {
-      console.log('$.inArray(i, answerTree[ questionIdNow ])');
       ifchecked = 'checked="checked"';
     } else {
       ifchecked = '';
@@ -58,7 +55,6 @@ function clickOption(clickedOption) {
       }
     });
     answerTree[ clickedOption ] = tmp ;
-    console.log(clickedOption, answerTree[ clickedOption ]);
   }
 
 
