@@ -1,4 +1,4 @@
-There are three files :stand.json, js-vote.json and ztree.json.
+There are three files: stand.json, js-vote.json and ztree.json.
 
 - The generator reads data, zTreeStyle as ztree.json, from `stand_to_ztree.php`
 - The generator writes data, standStyle as Style.json, directly

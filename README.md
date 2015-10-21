@@ -1,10 +1,10 @@
-# js-vote question_generator
-A js_based vote function.
+# js-vote
+js_based vote.
 
-This branch is **question_generator**.
+The question generator uses zTree .
 
-I'm going to use zTree for question generating.
+I wrote vote by myself .
 
-**It is mostly finished. Preparing to merge to master for future debugging.**
+mostly finished. need adjustment.
 
-2015.10.21.
+2015.10.21
