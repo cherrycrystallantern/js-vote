@@ -21,6 +21,7 @@ foreach ($standJsondecode['question'] as $questionId => $questionContent) {
         $zTree[$i]['pId'] = $option['pId'];
         $zTree[$i]['isParent'] = false;
         $zTree[$i]['name'] = $option['name'];
+        $zTree[$i]['checked'] = $option['checked'];
         ++$i;
     }
 }
