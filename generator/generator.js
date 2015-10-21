@@ -58,20 +58,28 @@ $(document).ready(function() {
     var nodesArray = treeObj.transformToArray(treeObj.getNodes());
     var qNodes = new Array();
     var oNodes = new Array();
-
+    var zIdq = 0;
+    var zIdo = 0;
     $.each(nodesArray, function(k, v) {
-
       if (v.isParent) {
-        qNodes.push( { "id": v.id,
+        zIdq++;
+        zIdo = 0;
+        qNodes.push( {
+          "id": zIdq,
           "name": v.name,
           "qInfo": v.qInfo,
           "qPic": v.qPic,
-          "qChoice": "s" } );
+          "qChoice": "s"
+        } );
+
       } else {
-        oNodes.push( { "id": v.id,
+        zIdo++;
+        oNodes.push( {
+          "id": zIdq * 10 + zIdo,
           "pId": v.pId,
           "name": v.name,
-          "checked": v.checked } );
+          "checked": v.checked
+        } );
       }
 
     });
