@@ -16,7 +16,8 @@
     "qInfo": "Question2 information",
     "qPic": "Question2 Picture URL",
     "qChoice": "s",
-    "optionStr": "[{\"id\":21,\"pId\":2,\"name\":\"This is Question2 Option1\",\"checked\":false},{\"id\":22,\"pId\":2,\"name\":\"This is Question2 Option2\",\"checked\":false},{\"id\":23,\"pId\":2,\"name\":\"This is Question2 Option3\",\"checked\":false}]"
+    "right": 22,
+    "optionStr": "[{\"id\":21,\"pId\":2,\"name\":\"This is Question2 Option1\",\"checked\":false},{\"id\":22,\"pId\":2,\"name\":\"This is Question2 Option2\",\"checked\":true},{\"id\":23,\"pId\":2,\"name\":\"This is Question2 Option3\",\"checked\":false}]"
   }, {
     "id": 3,
     "name": "Question3 title",

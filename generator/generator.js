@@ -13,7 +13,7 @@ function addHoverDom(treeId, treeNode) {
   sObj.after(addStr);
   var btn = $("#addBtn_" + treeNode.tId);
   if (btn) {btn.bind("click", function() {
-    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+    var zTree = $.fn.zTree.getZTreeObj("zTree");
     zTree.addNodes(treeNode, { id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++) });
     return false;
   });};
@@ -27,6 +27,10 @@ var zSetting = {
   data: {
     simpleData: {
       enable: true
+    },
+    keep: {
+      leaf: true,
+      parent: true
     }
   },
   async: {
