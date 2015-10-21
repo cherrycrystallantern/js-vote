@@ -47,17 +47,15 @@ $(document).ready(function() {
 
       if (v.isParent) {
         qNodes.push( { "id": v.id,
-          "pId": v.pId,
+          //"pId": v.pId,
           "name": v.name,
           "qInfo": v.qInfo,
           "qPic": v.qPic,
-          "qChoice": v.qChoice,
-          "isParent": v.isParent } );
+          "qChoice": v.qChoice } );
       } else {
         oNodes.push( { "id": v.id,
           "pId": v.pId,
-          "name": v.name,
-          "isParent": v.isParent } );
+          "name": v.name } );
       }
 
     });
@@ -76,14 +74,26 @@ $(document).ready(function() {
 
       qNodes[ qNodesK ][ "optionStr" ] = JSON.stringify(tmpArray);
     });
-    //console.log(JSON.stringify(qNodes));
-    var stand = new Array();
+    //console.log(qNodes);
+
+    qJson =  {
+      "mTitle": "This is main title",
+      "mInfo": "This is main information",
+      "mPic": "This is main title picturl url",
+      "question":qNodes
+    };
+    console.log(qJson);
+    console.log(JSON.stringify(qJson));
+    /*
+    var stand = new Object();
     stand[ 'mTitle' ] = "This is main title";
     stand[ 'mInfo' ] = "This is main information";
     stand[ 'mPic' ] = "This is main title picturl url";
+    console.log(stand);
     console.log(JSON.stringify(stand));
 
     stand.push(qNodes);
     console.log(JSON.stringify(stand));
+    */
   });
 });
