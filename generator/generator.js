@@ -26,7 +26,7 @@ var zSetting = {
   async: {
     enable: true,
     //url: "ztree_to_ztree.php",
-    url: "vote_to_ztree.php",
+    url: "stand_to_ztree.php",
     autoParam: [ "id" ]
   }
 };
@@ -82,7 +82,7 @@ $(document).ready(function() {
       "mPic": "This is main title picturl url",
       "question":qNodes
     };
-    console.log(qJson);
+    //console.log(qJson);
     console.log(JSON.stringify(qJson));
     /*
     var stand = new Object();
