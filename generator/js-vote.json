@@ -18,7 +18,7 @@
     "qTitle": "Question2 title",
     "qInfo": "Question2 information",
     "qPic": "Question2 Picture URL",
-    "qChoice": "m",
+    "qChoice": "s",
     "qOption": {
       "21": "This is Question2 Option1",
       "22": "This is Question2 Option2",
@@ -29,7 +29,7 @@
     "qTitle": "Question3 title",
     "qInfo": "Question3 information",
     "qPic": "Question3 Picture URL",
-    "qChoice": "m",
+    "qChoice": "s",
     "qOption": {
       "31": "This is Question3 Option1",
       "32": "This is Question3 Option2",
@@ -51,7 +51,7 @@
     "qTitle": "Question5 title",
     "qInfo": "Question5 information",
     "qPic": "Question5 Picture URL",
-    "qChoice": "m",
+    "qChoice": "s",
     "qOption": {
       "51": "This is Question5 Option1",
       "52": "This is Question5 Option2",

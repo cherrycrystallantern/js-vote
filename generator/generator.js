@@ -66,7 +66,7 @@ $(document).ready(function() {
           "name": v.name,
           "qInfo": v.qInfo,
           "qPic": v.qPic,
-          "qChoice": v.qChoice } );
+          "qChoice": "s" } );
       } else {
         oNodes.push( { "id": v.id,
           "pId": v.pId,
