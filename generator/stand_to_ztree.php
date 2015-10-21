@@ -13,6 +13,7 @@ foreach ($standJsondecode['question'] as $questionId => $questionContent) {
     $zTree[$i]['qChoice'] = $questionContent['qChoice'];
     $zTree[$i]['isParent'] = true;
     $zTree[$i]['nocheck'] = true;
+    $zTree[$i]['open'] = true;
     ++$i;
     $tmp = json_decode($questionContent['optionStr'], true);
     foreach ($tmp as $id => $option) {
