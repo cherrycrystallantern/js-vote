@@ -14,9 +14,7 @@ foreach ($standJsondecode['question'] as $questionId => $questionContent) {
     $zTree[$i]['isParent'] = true;
     ++$i;
     $tmp = json_decode($questionContent['optionStr'], true);
-    //print_r($tmp);
     foreach ($tmp as $id => $option) {
-        //$optionId = $id + $questionContent['id'] * 10;
         $zTree[$i]['id'] = $option['id'];
         $zTree[$i]['pId'] = $option['pId'];
         $zTree[$i]['isParent'] = false;
