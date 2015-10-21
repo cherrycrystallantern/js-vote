@@ -101,9 +101,9 @@ $(document).ready(function() {
         if (oNodesV.pId == qNodesV.id) {
           tmpArray.push(oNodesV);
 
-          console.log(oNodesV);
+          //console.log(oNodesV);
           if (oNodesV.checked == true) {
-            console.log(oNodesV);
+            //console.log(oNodesV);
             qNodes[ qNodesK ][ "right" ] = oNodesV.id;
           }
         }
