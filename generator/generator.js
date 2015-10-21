@@ -1,11 +1,12 @@
-function showRemoveBtn(treeId, treeNode) {
-  return !treeNode.isFirstNode;
-}
-
+var newCount = 1;
 function addHoverDom(treeId, treeNode) {
   //Need css
+  if (!treeNode.isParent) {
+    return;
+  }
   var sObj = $("#" + treeNode.tId + "_span");
-  if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) {return;
+  if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) {
+    return;
   };
   var addStr = "<span class='button add' id='addBtn_" + treeNode.tId +
     "' title='add node' onfocus='this.blur();'></span>";
@@ -36,7 +37,11 @@ var zSetting = {
   edit: {
     enable: true,
     editNameSelectAll: true,
-    showRemoveBtn: showRemoveBtn
+    //showRemoveBtn: showRemoveBtn,
+    drag:{
+      isCopy: false,
+      isMove: false
+    }
   },
   check: {
     enable: true,
@@ -45,7 +50,8 @@ var zSetting = {
   view: {
     addHoverDom: addHoverDom,
     removeHoverDom: removeHoverDom,
-    selectedMulti: false
+    selectedMulti: false,
+    dblClickExpand: false
   }
 };
 
@@ -71,12 +77,12 @@ $(document).ready(function() {
           "qPic": v.qPic,
           "qChoice": "s"
         } );
-
+        //This code need to change to use 'children' instead.
       } else {
         zIdo++;
         oNodes.push( {
           "id": zIdq * 10 + zIdo,
-          "pId": v.pId,
+          "pId": zIdq,
           "name": v.name,
           "checked": v.checked
         } );
