@@ -8,6 +8,13 @@ var zSetting = {
     enable: true,
     url: "stand_to_ztree.php",
     autoParam: [ "id" ]
+  },
+  edit: {
+    enable: true
+  },
+  check: {
+    enable: true,
+    chkStyle: 'radio'
   }
 };
 
