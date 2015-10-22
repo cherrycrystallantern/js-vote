@@ -92,7 +92,7 @@ function getTheQuestion() {
   console.log("Let's get The Question");
   $.ajax({
     type:'GET',
-    url:'test.json',
+    url:'generator/stand_to_vote.php',
     dataType:"json",
     async:false,
     success:function(msg) {

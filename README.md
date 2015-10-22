@@ -1,5 +1,10 @@
 # js-vote
-A js_based vote function.
+js_based vote.
 
-Now I'm working on it .
-2015.10.09.
+The question generator uses zTree .
+
+I wrote vote by myself .
+
+mostly finished. need adjustment.
+
+2015.10.21
